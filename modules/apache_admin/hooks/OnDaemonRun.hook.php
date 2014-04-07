@@ -172,6 +172,13 @@ function WriteVhostConfigFile()
         else {
             $vhostIp = $rowvhost[ 'vh_custom_ip_vc' ];
         }
+		
+		if ( fs_director::CheckForEmptyValue( $rowvhost[ 'vh_custom_options' ] ) ) {
+            $vhostOptions = ctrl_options::GetSystemOption( 'vhost_options' );
+        }
+        else {
+            $vhostOptions = $rowvhost[ 'vh_custom_options' ];
+        }
 
 
 
@@ -200,7 +207,7 @@ function WriteVhostConfigFile()
                 $line .= "ServerAdmin " . $useremail . fs_filehandler::NewLine();
                 $line .= "DocumentRoot \"" . ctrl_options::GetSystemOption( 'static_dir' ) . "diskexceeded\"" . fs_filehandler::NewLine();
                 $line .= "<Directory />" . fs_filehandler::NewLine();
-                $line .= "Options FollowSymLinks Indexes" . fs_filehandler::NewLine();
+                $line .= "Options " . $vhostOptions . fs_filehandler::NewLine();
                 $line .= "AllowOverride All" . fs_filehandler::NewLine();
                 $line .= "Order Allow,Deny" . fs_filehandler::NewLine();
                 $line .= "Allow from all" . fs_filehandler::NewLine();
@@ -234,7 +241,7 @@ function WriteVhostConfigFile()
                 $line .= "ServerAdmin " . $useremail . fs_filehandler::NewLine();
                 $line .= "DocumentRoot \"" . ctrl_options::GetSystemOption( 'static_dir' ) . "bandwidthexceeded\"" . fs_filehandler::NewLine();
                 $line .= "<Directory />" . fs_filehandler::NewLine();
-                $line .= "Options FollowSymLinks Indexes" . fs_filehandler::NewLine();
+                $line .= "Options " . $vhostOptions . fs_filehandler::NewLine();
                 $line .= "AllowOverride All" . fs_filehandler::NewLine();
                 $line .= "Order Allow,Deny" . fs_filehandler::NewLine();
                 $line .= "Allow from all" . fs_filehandler::NewLine();
@@ -267,7 +274,7 @@ function WriteVhostConfigFile()
                 $line .= "ServerAdmin " . $useremail . fs_filehandler::NewLine();
                 $line .= "DocumentRoot \"" . ctrl_options::GetSystemOption( 'parking_path' ) . "\"" . fs_filehandler::NewLine();
                 $line .= "<Directory />" . fs_filehandler::NewLine();
-                $line .= "Options FollowSymLinks Indexes" . fs_filehandler::NewLine();
+                $line .= "Options " . $vhostOptions . fs_filehandler::NewLine();
                 $line .= "AllowOverride All" . fs_filehandler::NewLine();
                 $line .= "Order Allow,Deny" . fs_filehandler::NewLine();
                 $line .= "Allow from all" . fs_filehandler::NewLine();
@@ -332,7 +339,7 @@ function WriteVhostConfigFile()
 
                 // Directory options
                 $line .= "<Directory />" . fs_filehandler::NewLine();
-                $line .= "Options FollowSymLinks Indexes" . fs_filehandler::NewLine();
+                $line .= "Options " . $vhostOptions . fs_filehandler::NewLine();
                 $line .= "AllowOverride All" . fs_filehandler::NewLine();
                 $line .= "Order Allow,Deny" . fs_filehandler::NewLine();
                 $line .= "Allow from all" . fs_filehandler::NewLine();
@@ -410,7 +417,7 @@ function WriteVhostConfigFile()
             $line .= "ServerAdmin " . $useremail . fs_filehandler::NewLine();
             $line .= "DocumentRoot \"" . ctrl_options::GetSystemOption( 'static_dir' ) . "disabled\"" . fs_filehandler::NewLine();
             $line .= "<Directory />" . fs_filehandler::NewLine();
-            $line .= "Options FollowSymLinks Indexes" . fs_filehandler::NewLine();
+            $line .= "Options " . $vhostOptions . fs_filehandler::NewLine();
             $line .= "AllowOverride All" . fs_filehandler::NewLine();
             $line .= "Order Allow,Deny" . fs_filehandler::NewLine();
             $line .= "Allow from all" . fs_filehandler::NewLine();

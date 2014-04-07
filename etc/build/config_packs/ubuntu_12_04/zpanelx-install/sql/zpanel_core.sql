@@ -781,6 +781,7 @@ insert  into `x_settings`(`so_id_pk`,`so_name_vc`,`so_cleanname_vc`,`so_value_tx
 insert  into `x_settings`(`so_id_pk`,`so_name_vc`,`so_cleanname_vc`,`so_value_tx`,`so_defvalues_tx`,`so_desc_tx`,`so_module_vc`,`so_usereditable_en`) values (119,'cron_reload_user','Cron Reload User','www-data',NULL,'Cron reload apache user in Linux','Cron Config','true');
 insert  into `x_settings`(`so_id_pk`,`so_name_vc`,`so_cleanname_vc`,`so_value_tx`,`so_defvalues_tx`,`so_desc_tx`,`so_module_vc`,`so_usereditable_en`) values (120,'login_csfr','Remote Login Forms','false','false|true','Disables CSFR protection on the login form to enable remote login forms.','ZPanel Config','true');
 insert  into `x_settings`(`so_id_pk`,`so_name_vc`,`so_cleanname_vc`,`so_value_tx`,`so_defvalues_tx`,`so_desc_tx`,`so_module_vc`,`so_usereditable_en`) values (121, 'files_bu', 'Backup files', 'day', 'never|day|week|month', 'Frequence to backup files from the disk', 'Backup Config', 'true');
+insert  into `x_settings`(`so_id_pk`,`so_name_vc`,`so_cleanname_vc`,`so_value_tx`,`so_defvalues_tx`,`so_desc_tx`,`so_module_vc`,`so_usereditable_en`) values (122,'vhost_options','VHost Options','FollowSymLinks Indexes',NULL,'The global Options Directive to be used in every domain','Apache Config','true');
 
 /*Table structure for table `x_translations` */
 
@@ -872,6 +873,7 @@ CREATE TABLE `x_vhosts` (
   `vh_custom_tx` text,
   `vh_custom_port_in` int(6) DEFAULT NULL,
   `vh_custom_ip_vc` varchar(45) DEFAULT NULL,
+  `vh_custom_options` varchar(255) DEFAULT NULL,
   `vh_portforward_in` int(1) DEFAULT NULL,
   `vh_soaserial_vc` CHAR(10) DEFAULT 'AAAAMMDDSS',
   `vh_enabled_in` int(1) DEFAULT '1',

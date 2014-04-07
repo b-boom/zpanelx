@@ -266,6 +266,7 @@ class module_controller extends ctrl_module
                 $line .= "<tr><th>" . ui_language::translate("Port Override") . "</th><td><input type=\"text\" name=\"vh_custom_port_in\" id=\"vh_custom_port_in\" maxlength=\"6\" value=\"" . $row['vh_custom_port_in'] . "\"/>";
                 $line .= "<tr><th>" . ui_language::translate("Forward Port 80 to Overriden Port") . ":</th><td><input type=\"checkbox\" name=\"vh_portforward_in\" id=\"vh_portforward_in\" value=\"1\" " . fs_director::IsChecked($row['vh_portforward_in']) . "/>" . ui_language::translate("Warning requires Apache mod_rewrite to be installed on the server.") . "</td></tr>";
                 $line .= "<tr><th>" . ui_language::translate("IP Override") . "</th><td><input type=\"text\" name=\"vh_custom_ip_vc\" id=\"vh_custom_ip_vc\" maxlength=\"20\" value=\"" . $row['vh_custom_ip_vc'] . "\"/>";
+				$line .= "<tr><th>" . ui_language::translate("VHost options overide") . "</th><td><input type=\"text\" name=\"vh_custom_options\" id=\"vh_custom_options\" maxlength=\"20\" value=\"" . $row['vh_custom_options'] . "\"/>";
                 $line .= "<tr valign=\"top\"><th>" . ui_language::translate("Custom Entry") . ":</th><td><textarea cols=\"60\" rows=\"10\" name=\"vh_custom_tx\">" . $row['vh_custom_tx'] . "</textarea></td></tr>";
             }
         }
@@ -338,6 +339,13 @@ class module_controller extends ctrl_module
         } else {
             $ip = $controller->GetControllerRequest('FORM', 'vh_custom_ip_vc');
         }
+		
+		$options = $controller->GetControllerRequest('FORM', 'vh_custom_options');
+        if (empty($ip)) {
+            $options = NULL;
+        } else {
+            $options = $controller->GetControllerRequest('FORM', 'vh_custom_options');
+        }
 
 
 
@@ -348,6 +356,7 @@ class module_controller extends ctrl_module
 			vh_custom_port_in   = ?,
                         vh_portforward_in   = ?,
                         vh_custom_ip_vc   = ?,
+                        vh_custom_options   = ?,
 			vh_custom_tx   = ?
 			WHERE
 			vh_id_pk = ?
@@ -360,6 +369,7 @@ class module_controller extends ctrl_module
                     $port,
                     fs_director::GetCheckboxValue($controller->GetControllerRequest('FORM', 'vh_portforward_in')),
                     $ip,
+                    $options,
                     $controller->GetControllerRequest('FORM', 'vh_custom_tx'),
                     $controller->GetControllerRequest('FORM', 'vh_id_pk'),
                 )
